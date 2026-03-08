@@ -9,12 +9,14 @@
 *.log
 *.out
 *.pdf
+!all-emoji.pdf
 *.synctex.gz
 *.toc
 
 .vscode/
 data/
-fonts/
+fonts/*
+!fonts/TwitterColorEmoji.otf
 release/
 test/
 
