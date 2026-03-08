@@ -16,6 +16,7 @@ mkdir -p $tex_dir
 mkdir -p $doc_dir
 
 cp emoji.sty       $ctan_dir
+cp emoji-direct-input.lua $ctan_dir
 cp emoji-table.def $ctan_dir
 cp emoji-doc.tex   $ctan_dir
 cp emoji-doc.pdf   $ctan_dir
@@ -24,6 +25,7 @@ cp README.md       $ctan_dir
 chmod 644 $ctan_dir/*.*
 
 cp $ctan_dir/emoji.sty       $tex_dir
+cp $ctan_dir/emoji-direct-input.lua $tex_dir
 cp $ctan_dir/emoji-table.def $tex_dir
 cp $ctan_dir/emoji-doc.tex   $doc_dir
 cp $ctan_dir/emoji-doc.pdf   $doc_dir

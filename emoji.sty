@@ -123,7 +123,19 @@
       \tl_use:c { c__emoji_ #1 _tl }
     \group_end:
   }
+\cs_new_protected:Npn \emoji_input:n #1
+  {
+    \group_begin:
+      \__emoji_ltj_set_range:n {#1}
+      \emoji_font:
+      #1
+    \group_end:
+  }
+\NewDocumentCommand \emojiinput { m }
+  { \emoji_input:n {#1} }
 \cs_new_eq:NN \__emoji_ltj_set_range:n \use_none:n
+
+\directlua{dofile(assert(kpse.find_file("emoji-direct-input.lua")))}
 
 % Define new emoji. They are stored in tl constants internally.
 % For special characters (#), we first change their catcode to 12 (other),
@@ -145,6 +157,7 @@
   {
       \clist_map_inline:nn { #2, #3 }
         { \tl_const:cn { c__emoji_ ##1 _tl } {#1} }
+      \directlua{emoji.register_sequence("\luaescapestring{#1}")}
     \group_end:
   }
 
@@ -170,6 +183,8 @@
           {
             \cs_set_nopar:Npn \emoji #1
               { \tl_use:c { c__emoji_ #1 _tl } }
+            \cs_set_nopar:Npn \emojiinput #1
+              {#1}
           }
       }
 
@@ -195,6 +210,9 @@
     % fonts automatically.
     \cs_if_exist:NF \emoji_font:
       { \__emoji_detect_font: }
+
+    % Convert direct emoji input to `\emojiinput{...}`.
+    \directlua{emoji.enable_direct_input()}
   }
 
 \endinput
