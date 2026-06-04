@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-
 import json
 import re
 import unicodedata as ud
 
 COPYRIGHT_NOTICE = r'''%%
-%%  Copyright (C) 2020--2023 by Xiangdong Zeng <xdzeng96@gmail.com>
+%%  Copyright (C) 2020--2026 by Xiangdong Zeng <xdzeng96@gmail.com>
 %%
 %%  This work may be distributed and/or modified under the
 %%  conditions of the LaTeX Project Public License, either
@@ -74,6 +72,8 @@ class Builder:
 
     def _read_from_unicode_data(self):
         with open(UNICODE_EMOJI_DATA_FILE, encoding='utf-8') as f:
+            group_name = ''
+            subgroup_name = ''
             for line in f.readlines():
                 if line.startswith('# group'):
                     group_name = line[9:-1]
